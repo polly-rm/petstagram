@@ -1,0 +1,59 @@
+{% include 'common/header.html' %}
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:2%">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="{% url 'landing page' %}">Home</a></li>
+            <li><a class="nav-link" href="{% url 'list pets' %}">All pets</a></li>
+            {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login user' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register user' %}">Register</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile details' %}">{{ request.user }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout user' %}">Logout</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="jumbotron parent">
+        <img style="width: 100%"
+             src="https://activepets.co.za/web/ap-content/uploads/2019/08/Active-pets-dogs-and-cats.png" alt="">
+        <div class="absolute">
+            <h1 class="display-4">Welcome to Petstagram</h1>
+            <p class="lead">Share your pets photos.</p>
+            <hr class="my-4">
+            <div class="inner cover">
+                <h1 class="cover-heading"></h1>
+                {% if not request.user.is_authenticated %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p class="lead">Already have an account? <br><a href="{% url 'login user' %}"
+                                                                            class="btn btn-lg btn-secondary">login</a>
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p class="lead"> Do not have an account? <br>
+                                <a href="{% url 'register user' %}" class="btn btn-lg btn-secondary">register</a>
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'common/footer.html' %}
